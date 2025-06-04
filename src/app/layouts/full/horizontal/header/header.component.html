@@ -69,39 +69,11 @@
             <div
               class="b-t-1 p-24 d-none d-lg-flex align-items-center justify-content-between"
             >
-              <span
-                class="d-flex align-items-center mat-subtitle-1 f-s-16 f-w-500"
-              >
-                <i-tabler name="help" class="icon-20 m-r-8"></i-tabler
-                >Frequently Asked Questions
-              </span>
-              <a
-                [routerLink]="['/theme-pages/faq']"
-                mat-flat-button
-                color="primary"
-                >Check</a
-              >
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="p-x-16 p-y-32">
-              <h4 class="f-s-18 f-w-600 mat-subtitle-1 m-b-16">Quick Links</h4>
-              @for(quicklink of quicklinks; track quicklink.title) {
-              <div class="text-hover-primary">
-                <a
-                  [routerLink]="[quicklink.link]"
-                  class="hover-text text-decoration-none mat-body-1 f-w-600 d-block p-y-8"
-                  >{{ quicklink.title }}</a
-                >
-              </div>
-              }
+              
             </div>
           </div>
         </div>
       </mat-menu>
-      <a mat-button [routerLink]="['/apps/chat']">Chat</a>
-      <a mat-button [routerLink]="['/apps/calendar']">Calendar</a>
-      <a mat-button [routerLink]="['/apps/email/inbox']">Email</a>
     </div>
 
     <span class="flex-1-auto"></span>
