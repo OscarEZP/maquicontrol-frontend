@@ -1,0 +1,126 @@
+<div class="public-header" [class.minimized]="expandir">
+  <mat-card class="cardWithShadow">
+    <div class="left">
+      <img [src]="imageUrl" alt="imagen-activo" class="public-image shadow-sm" />
+      <div>
+        <h2 class="mat-headline m-0 f-w-700" [class.minimized]="expandir">{{ nombre }}</h2>
+        <div class="f-s-14 text-muted" [class.minimized]="expandir">Categoría: {{ categoria }}</div>
+        <div class="f-s-14 text-muted" [class.minimized]="expandir">Tipo de motor: {{ tipoMotor }}</div>
+      </div>
+    </div>
+    <div class="text-end">
+      <mat-chip color="primary" selected class="text-white">
+        {{ estado }}
+      </mat-chip>
+    </div>
+  </mat-card>
+</div>
+
+
+<!-- Acciones disponibles -->
+<mat-card class="acciones-card">
+  <mat-card-title>
+    <span>
+      <mat-icon class="me-2">folder</mat-icon> Acciones Disponibles
+    </span>
+    <div class="expand-toggle">
+      <button mat-button color="primary" (click)="expandir = !expandir">
+        {{ expandir ? 'Ver menos' : 'Ver más' }}
+        <mat-icon>{{ expandir ? 'expand_less' : 'expand_more' }}</mat-icon>
+      </button>
+    </div>
+  </mat-card-title>
+
+  <div class="acciones-disponibles" [ngClass]="{ 'expandido': expandir }">
+    <button class="accion-btn">
+      <mat-icon>image</mat-icon>
+      Multimedia
+    </button>
+    <button class="accion-btn">
+      <mat-icon>edit</mat-icon>
+      Editar
+    </button>
+    <button class="accion-btn">
+      <mat-icon>delete</mat-icon>
+      Eliminar
+    </button>
+    <button class="accion-btn">
+      <mat-icon>description</mat-icon>
+      Manual
+    </button>
+    <button class="accion-btn">
+      <mat-icon>settings</mat-icon>
+      Configuración
+    </button>
+    <button class="accion-btn">
+      <mat-icon>cloud_upload</mat-icon>
+      Subir Archivos
+    </button>
+    <ng-container *ngIf="expandir">
+      <button class="accion-btn">
+        <mat-icon>folder_open</mat-icon>
+        Documentos
+      </button>
+      <button class="accion-btn">
+        <mat-icon>smart_display</mat-icon>
+        Videos
+      </button>
+      <button class="accion-btn">
+        <mat-icon>history</mat-icon>
+        Historial
+      </button>
+    </ng-container>
+  </div>
+</mat-card>
+
+<mat-card class="seccion-info">
+  <h4>
+    <mat-icon>assignment</mat-icon> Detalles Técnicos
+  </h4>
+  <div class="fila">
+    <span><b>Largo:</b> {{ largo }} Mts.</span>
+    <span><b>Alt trabajo:</b> {{ alturaTrabajo }} Mts.</span>
+  </div>
+  <div class="fila">
+    <span><b>Alto:</b> {{ alto }} Mts.</span>
+    <span><b>Carga máx:</b> {{ cargaMax }} Kg</span>
+  </div>
+  <div class="fila">
+    <span><b>Ancho:</b> {{ ancho }} Mts.</span>
+    <span><b>Incl. frontal:</b> {{ inclinacionFrontal }} %</span>
+  </div>
+  <div class="fila">
+    <span><b>Peso:</b> {{ peso }} Kg</span>
+    <span><b>Incl. lateral:</b> {{ inclinacionLateral }} %</span>
+  </div>
+</mat-card>
+
+<mat-card class="seccion-info">
+  <h4>
+    <mat-icon>settings</mat-icon> Motor Diesel
+  </h4>
+  <div class="fila"><span>🏭 <b>Marca:</b> {{ motorDiesel?.marca }}</span></div>
+  <div class="fila"><span>📋 <b>Modelo:</b> {{ motorDiesel?.modelo }}</span></div>
+  <div class="fila"><span>🔢 <b>Cilindrada:</b> {{ motorDiesel?.cilindrada }} cm³</span></div>
+  <div class="fila"><span>🔢 <b>Voltaje sistema:</b> {{ motorDiesel?.voltaje_sistema }} V</span></div>
+  <div class="fila"><span>🔢 <b>Depósito:</b> {{ motorDiesel?.deposito }} Lts.</span></div>
+</mat-card>
+
+<mat-card class="seccion-info">
+  <h4><mat-icon>phone</mat-icon> Contactos</h4>
+  <div class="fila centrado">
+    <button mat-stroked-button class="contacto-btn">
+      👔 Comercial
+    </button>
+    <button mat-stroked-button class="contacto-btn">
+      🔧 Taller
+    </button>
+    <button mat-stroked-button class="contacto-btn">
+      🏢 Oficina
+    </button>
+  </div>
+</mat-card>
+
+<mat-card class="footer-info">
+  🏗️ Maquicontrol Sistemas – Gestión de Activos 🏗️
+</mat-card>

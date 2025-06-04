@@ -1,0 +1,87 @@
+<form [formGroup]="machineForm" (ngSubmit)="onSubmit()">
+  <mat-card class="cardWithShadow">
+    <mat-card-content>
+
+      <!-- Título -->
+      <h2 class="mat-headline">Editar Máquina</h2>
+
+      <!-- FILA GENERAL -->
+      <div class="row">
+        <div class="col-sm-6" *ngFor="let field of generalFields">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">{{ field.label }} *</mat-label>
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <input matInput [formControlName]="field.name" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- CARGA DE IMAGEN -->
+      <div class="row m-t-16">
+        <div class="col-sm-6">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Imagen del Activo</mat-label>
+          <div class="d-flex align-items-center">
+            <input type="file" #fileInput hidden (change)="onFileSelected($event)" />
+            <button mat-flat-button color="primary" type="button" (click)="fileInput.click()">Seleccionar archivo</button>
+            <span class="ms-2 f-s-14" *ngIf="selectedFileName">{{ selectedFileName }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN MOTOR ELÉCTRICO -->
+      <div *ngIf="tipoMotor === 'electrico'" class="m-t-24">
+        <mat-card class="border-left border-success">
+          <mat-card-title>
+            🔋 Información de Batería
+          </mat-card-title>
+          <div class="row">
+            <div class="col-sm-6" *ngFor="let field of bateriaFields">
+              <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">{{ field.label }} *</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput [formControlName]="field.name" />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card class="m-t-16 border-left border-info">
+          <mat-card-title>
+            ⚡ Información del Cargador
+          </mat-card-title>
+          <div class="row">
+            <div class="col-sm-4" *ngFor="let field of cargadorFields">
+              <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">{{ field.label }} *</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput [formControlName]="field.name" />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+      <!-- SECCIÓN MOTOR DIÉSEL -->
+      <div *ngIf="tipoMotor === 'diesel'" class="m-t-24">
+        <mat-card class="border-left border-warning">
+          <mat-card-title>
+            ⛽ Información del Motor Diésel
+          </mat-card-title>
+          <div class="row">
+            <div class="col-sm-4" *ngFor="let field of dieselFields">
+              <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">{{ field.label }} *</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput [formControlName]="field.name" />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+      <!-- BOTÓN DE GUARDAR -->
+      <div class="m-t-24 text-end">
+        <button mat-flat-button color="primary" type="submit">
+          💾 Guardar Cambios
+        </button>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</form>

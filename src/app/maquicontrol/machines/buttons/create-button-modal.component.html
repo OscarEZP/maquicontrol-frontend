@@ -1,0 +1,60 @@
+<h2 mat-dialog-title *ngIf="!data">Crear Nuevo Botón</h2>
+<h2 mat-dialog-title *ngIf="data">Editar Botón</h2>
+
+<mat-dialog-content [formGroup]="form" class="p-y-12">
+  <!-- Nombre -->
+  <mat-form-field appearance="outline" class="w-100 m-b-16">
+    <mat-label>Nombre del Botón</mat-label>
+    <input matInput formControlName="nombre" />
+  </mat-form-field>
+
+  <!-- Texto -->
+  <mat-form-field appearance="outline" class="w-100 m-b-16">
+    <mat-label>Texto del Botón</mat-label>
+    <input matInput formControlName="texto" />
+  </mat-form-field>
+
+  <!-- Estilo -->
+  <mat-form-field appearance="outline" class="w-100 m-b-16">
+    <mat-label>Color del botón</mat-label>
+    <mat-select formControlName="estilo">
+      <mat-option value="orange">Naranja</mat-option>
+      <mat-option value="blue">Azul</mat-option>
+      <mat-option value="red">Rojo</mat-option>
+      <mat-option value="green">Verde</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Icono -->
+  <mat-form-field appearance="outline" class="w-100 m-b-4">
+    <mat-label>Icono (opcional)</mat-label>
+    <mat-select formControlName="icono">
+      <mat-option *ngFor="let icon of materialIcons" [value]="icon">
+        <mat-icon class="me-2">{{ icon }}</mat-icon> {{ icon }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="f-s-12 text-muted m-b-16">
+    Usar nombres de íconos de <a href="https://fonts.google.com/icons" target="_blank">Material Icons</a>
+  </div>
+
+  <!-- Vista previa -->
+  <div class="text-center m-t-16">
+    <button
+      mat-flat-button
+      class="btn-preview"
+      [ngClass]="form.value.estilo"
+    >
+      <mat-icon *ngIf="form.value.icono " class="me-2">{{ form.value.icono }}</mat-icon>
+      {{ form.value.texto || 'Vista previa' }}
+    </button>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="m-t-16">
+  <button mat-stroked-button mat-dialog-close>Cancelar</button>
+  <button mat-flat-button color="primary" (click)="guardarBoton()" [disabled]="form.invalid">
+    <mat-icon class="me-2">save</mat-icon> Guardar
+  </button>
+</mat-dialog-actions>

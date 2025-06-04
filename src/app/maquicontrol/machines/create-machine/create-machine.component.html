@@ -1,0 +1,99 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">
+      {{ isEditMode ? 'Editar Máquina' : 'Crear Máquina' }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <form [formGroup]="machineForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <!-- Categoría -->
+        <div class="col-sm-6">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Categoría</mat-label>
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <input matInput formControlName="categoria" />
+          </mat-form-field>
+        </div>
+
+        <!-- Tipo -->
+        <div class="col-sm-6">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Tipo</mat-label>
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <input matInput formControlName="tipo" />
+          </mat-form-field>
+        </div>
+
+        <!-- Marca -->
+        <div class="col-sm-6">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Marca</mat-label>
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <input matInput formControlName="marca" />
+          </mat-form-field>
+        </div>
+
+        <!-- Modelo -->
+        <div class="col-sm-6">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Modelo</mat-label>
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <input matInput formControlName="modelo" />
+          </mat-form-field>
+        </div>
+
+        <!-- Número de serie -->
+        <div class="col-sm-6">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Número de serie</mat-label>
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <input matInput formControlName="num_serie" />
+          </mat-form-field>
+        </div>
+
+        <!-- Número de parque -->
+        <div class="col-sm-6">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Número de parque</mat-label>
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <input matInput formControlName="num_parque" />
+          </mat-form-field>
+        </div>
+
+        <!-- Matrícula -->
+        <div class="col-sm-6">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Matrícula</mat-label>
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <input matInput formControlName="matricula" />
+          </mat-form-field>
+        </div>
+
+        <!-- Imagen (input tipo file) -->
+        <div class="col-sm-6 m-t-12">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Imagen</mat-label>
+          <div class="d-flex align-items-center">
+            <input
+              type="file"
+              #fileInput
+              hidden
+              (change)="onFileSelected($event)"
+            />
+            <button
+              mat-flat-button
+              color="primary"
+              type="button"
+              (click)="fileInput.click()"
+            >
+              Seleccionar archivo
+            </button>
+            <span class="ms-2 f-s-14" *ngIf="selectedFileName">
+              {{ selectedFileName }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón -->
+      <div class="m-t-12 text-end">
+        <button mat-flat-button color="primary" type="submit">
+          {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

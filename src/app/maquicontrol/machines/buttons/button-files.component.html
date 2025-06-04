@@ -1,0 +1,105 @@
+<h2 mat-dialog-title>Gestión de Archivos</h2>
+
+<mat-dialog-content class="p-y-12">
+
+  <mat-card class="b-1 shadow-none">
+
+    <mat-card-content class="b-t-1">
+      <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+        <mat-tab label="Archivos">
+          <div class="row">
+            <div class="col-md-6 col-lg-4 m-b-16" *ngFor="let archivo of archivos">
+              <mat-card class="cardWithShadow text-center">
+                <mat-card-content>
+
+                  <ng-container *ngIf="esImagen(archivo.tipo); else iconoArchivo">
+                    <img [src]="archivo.url" alt="{{ archivo.nombre }}" class="img-fluid rounded m-b-8"
+                      style="max-height: 180px; object-fit: cover; width: 100%;" />
+                  </ng-container>
+
+                  <ng-template #iconoArchivo>
+                    <div class="d-flex justify-content-center align-items-center" style="height: 180px;">
+                      <mat-icon [ngClass]="{
+                          'text-danger': archivo.tipo === 'pdf',
+                          'text-primary': archivo.tipo === 'docx'
+                        }" style="font-size: 64px;">
+                        {{ archivo.tipo === 'pdf' ? 'picture_as_pdf' : 'description' }}
+                      </mat-icon>
+                    </div>
+                  </ng-template>
+
+                  <div class="mat-subtitle-2 f-w-600 m-t-8 m-b-12">
+                    {{ archivo.nombre }}
+                  </div>
+
+                  <button mat-stroked-button color="warn" class="w-100" (click)="eliminarArchivo(archivo)">
+                    Borrar documento
+                  </button>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+
+        </mat-tab>
+
+
+        <mat-tab label="Subir">
+          <div class="bg-light-primary mat-body-1 p-16 rounded m-t-12">
+            <!-- Área de arrastre / selección -->
+            <div class="upload-dropzone" (dragover)="onDragOver($event)" (drop)="onFileDrop($event)"
+              (click)="fileInput.click()">
+              <div class="text-center">
+                <mat-icon class="mb-2" style="font-size: 40px;">upload</mat-icon>
+                <p class="mat-subtitle-1 m-0">Arrastra archivo aquí o haz clic para seleccionar</p>
+              </div>
+              <input type="file" hidden #fileInput (change)="onFileSelected($event)" multiple />
+            </div>
+          </div>
+
+          <!-- Previsualización de archivos -->
+          <div class="row m-t-16" *ngIf="uploadedFiles.length > 0">
+            <div class="col-sm-6 col-lg-4" *ngFor="let file of uploadedFiles; let i = index">
+              <mat-card class="cardWithShadow text-center p-16">
+                <div class="preview-container m-b-12">
+                  <ng-container [ngSwitch]="file.tipo">
+                    <!-- Imagen -->
+                    <img *ngSwitchCase="'image'" [src]="file.preview" alt="imagen"
+                      class="img-fluid rounded shadow-sm" />
+
+                    <!-- PDF -->
+                    <div *ngSwitchCase="'pdf'" class="doc-icon bg-red text-white">
+                      <mat-icon style="font-size: 48px;">picture_as_pdf</mat-icon>
+                    </div>
+
+                    <!-- Word -->
+                    <div *ngSwitchCase="'docx'" class="doc-icon bg-blue text-white">
+                      <mat-icon style="font-size: 48px;">description</mat-icon>
+                    </div>
+
+                    <!-- Otros -->
+                    <div *ngSwitchDefault class="doc-icon bg-gray text-dark">
+                      <mat-icon style="font-size: 48px;">insert_drive_file</mat-icon>
+                    </div>
+                  </ng-container>
+                </div>
+
+                <div class="text-center m-b-8">
+                  <div class="f-w-600">{{ file.nombre }}</div>
+                  <div class="f-s-12 text-muted">{{ file.tipoOriginal }}</div>
+                </div>
+
+                <button mat-stroked-button color="warn" (click)="removeFile(i)">Borrar documento</button>
+              </mat-card>
+            </div>
+          </div>
+        </mat-tab>
+
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="m-t-16">
+  <button mat-stroked-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

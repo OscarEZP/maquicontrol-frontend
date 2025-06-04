@@ -1,0 +1,77 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <div class="row justify-content-between">
+      <div class="col-sm-4">
+        <mat-form-field appearance="outline" class="hide-hint">
+          <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Buscar máquina" />
+          <mat-icon matSuffix>
+            <i-tabler name="search" class="icon-20"></i-tabler>
+          </mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4 d-flex justify-content-end align-items-center">
+        <button mat-flat-button color="primary" [routerLink]="['/machines/create']">
+          Crear máquina
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" class="w-100 f-w-500 no-wrap">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef class="f-s-16 f-w-600">ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="marca_modelo">
+          <th mat-header-cell *matHeaderCellDef class="f-s-16 f-w-600">Marca / Modelo</th>
+          <td mat-cell *matCellDef="let element">
+            <h6 class="m-0 f-s-16 mat-subtitle-1 f-w-500 m-b-4">{{ element.marca }} {{ element.modelo }}</h6>
+            <span class="m-0 f-s-14 f-w-400 d-block">Motor: {{ element.tipo_motor }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="empresa">
+          <th mat-header-cell *matHeaderCellDef class="f-s-16 f-w-600">Empresa</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex align-items-center">
+              <span class="f-w-600 f-s-16 mat-subtitle-1">{{ element.nombre_empresa }}</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="matricula">
+          <th mat-header-cell *matHeaderCellDef class="f-s-16 f-w-600">Matrícula</th>
+          <td mat-cell *matCellDef="let element">{{ element.matricula }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="num_parque">
+          <th mat-header-cell *matHeaderCellDef class="f-s-16 f-w-600">Nº Parque</th>
+          <td mat-cell *matCellDef="let element">{{ element.num_parque }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="num_serie">
+          <th mat-header-cell *matHeaderCellDef class="f-s-16 f-w-600">Nº Serie</th>
+          <td mat-cell *matCellDef="let element">{{ element.num_serie }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="accion">
+          <th mat-header-cell *matHeaderCellDef class="f-s-16 f-w-600">Acción</th>
+          <td mat-cell *matCellDef="let element" class="action-link">
+            <a class="m-r-10 cursor-pointer"><i-tabler name="edit" [routerLink]="['/machines/update', element.id]" class="icon-18"></i-tabler></a>
+            <a class="m-r-10 cursor-pointer"><i-tabler name="trash" class="icon-18"></i-tabler></a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

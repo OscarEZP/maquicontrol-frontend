@@ -1,0 +1,63 @@
+<mat-card class="course-app cardWithShadow">
+  <mat-card-content class="p-24">
+    <div class="row justify-content-between">
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline" class="w-100 hide-hint">
+          <mat-label>Search</mat-label>
+          <input matInput (keyup)="applyFilter($event)" />
+          <mat-icon matSuffix>
+            <i-tabler name="search" class="icon-20"></i-tabler>
+          </mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4 d-flex justify-content-end align-items-center">
+        <button mat-flat-button color="primary" (click)="openDialog()">
+          Crear Botón
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<div class="row">
+  @for(button of buttonsList; track button.nombre) {
+    <div class="col-sm-6 col-lg-4">
+      <mat-card class="cardWithShadow overflow-hidden">
+        <!-- Header con color primario -->
+        <mat-card-header class="bg-primary d-flex justify-content-between text-white">
+          <mat-card-title class="m-b-0 f-s-16 text-white">
+            {{ button.nombre }}
+          </mat-card-title>
+        </mat-card-header>
+
+        <!-- Contenido -->
+        <mat-card-content class="text-center p-y-24">
+          <h3 class="m-b-4 mat-subtitle-2 f-s-16 f-w-600">
+            {{ button.texto }}
+          </h3>
+        </mat-card-content>
+
+        <mat-divider></mat-divider>
+
+        <!-- Acción -->
+        <mat-card-actions class="p-y-8">
+          <div class="acciones-triple">
+            <button mat-stroked-button color="accent" class="btn-accion primary" (click)="openDialog(button)">
+              Editar
+            </button>
+
+            <button mat-stroked-button color="warn" class="btn-accion warn">
+              Eliminar
+            </button>
+
+            <button mat-stroked-button color="primary" class="btn-accion" (click)="openArchivosDialog(button.nombre)">
+              Archivos
+            </button>
+          </div>
+        </mat-card-actions>
+
+      </mat-card>
+    </div>
+
+  }
+</div>

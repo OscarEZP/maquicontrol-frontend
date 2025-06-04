@@ -1,0 +1,152 @@
+.course-header {
+  padding: 12px !important;
+  color: #fff;
+  .mat-card-header-text {
+    width: 100% !important;
+  }
+  &.Angular {
+    background-color: #fc4b6c;
+  }
+
+  &.Web {
+    background-color: #1e88e5;
+  }
+
+  &.Design {
+    background-color: #26c6da;
+  }
+
+  &.Android {
+    background-color: #ffb22b;
+  }
+
+  .mat-card-title {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    .course-duration {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.mat-card-actions {
+  border-top: 1px solid rgba(120, 130, 140, 0.13);
+  padding: 8px 0 !important;
+}
+
+.bg-primary {
+  background-color: var(--mat-primary, #5d87ff); // fallback
+  color: white !important;
+  opacity: 85%;
+
+  .mat-card-title,
+  .mat-card-subtitle,
+  i,
+  span {
+    color: white !important;
+  }
+}
+
+.acciones-triple {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+
+  .btn-accion {
+    flex: 1 1 calc(33.333% - 8px); // divide el espacio entre 3, con separación
+    min-width: 0; // evita desbordamiento
+    white-space: nowrap;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    border-width: 2px;
+
+    mat-icon {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .btn-accion {
+      flex: 1 1 100%;
+    }
+  }
+}
+
+.btn-preview {
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.orange {
+  background-color: #ff9800;
+  border-color: #ff9800;
+  color: #ffffff
+}
+
+.blue {
+  background-color: #2196f3;
+  border-color: #2196f3;
+  color: #ffffff
+}
+
+.red {
+  background-color: #f44336;
+  border-color: #f44336;
+  color: #ffffff
+}
+
+.green {
+  background-color: #4caf50;
+  border-color: #4caf50;
+  color: #ffffff
+}
+
+
+
+.upload-dropzone {
+  border: 2px dashed #90caf9;
+  border-radius: 8px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.upload-dropzone:hover {
+  background-color: #e3f2fd;
+}
+
+.preview-container img {
+  max-height: 140px;
+  width: auto;
+  margin: 0 auto;
+}
+
+.doc-icon {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.bg-red {
+  background-color: #f44336;
+}
+
+.bg-blue {
+  background-color: #2196f3;
+}
+
+.bg-gray {
+  background-color: #e0e0e0;
+}
+
