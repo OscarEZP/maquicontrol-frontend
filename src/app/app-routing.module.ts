@@ -3,26 +3,32 @@ import { RouterModule, Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
 import { PublicDetailsComponent } from './maquicontrol/machines/public-details/public-details.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: FullComponent,
+    component: BlankComponent,
     children: [
-      { path: '', redirectTo: '/machines', pathMatch: 'full' },
-      {
-        path: 'machines',
-        loadChildren: () => import('./maquicontrol/machines/machines.module').then(m => m.MachinesModule)
-      }
-    ]
+      { path: '', component: LandingPageComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'public-details/:id', component: PublicDetailsComponent },
+    ],
   },
   {
     path: '',
-    component: BlankComponent,
+    component: FullComponent,
     children: [
-      { path: 'public-details/:id', component: PublicDetailsComponent }
-    ]
-  }
+      {
+        path: 'machines',
+        loadChildren: () =>
+          import('./maquicontrol/machines/machines.module').then(
+            (m) => m.MachinesModule
+          ),
+      },
+    ],
+  },
 ];
 
 @NgModule({
