@@ -1,8 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { course } from 'src/app/pages/apps/courses/course';
-import { CourseService } from 'src/app/pages/apps/courses/course.service';
 import { ButtonFilesComponent } from './button-files.component';
 
 @Component({
@@ -109,7 +107,7 @@ export class ButtonsComponent {
   ];
   botonForm: FormGroup;
 
-  constructor(private courseService: CourseService, private dialog: MatDialog, private fb: FormBuilder) {
+  constructor(private dialog: MatDialog, private fb: FormBuilder) {
     this.buttonsList = this.buttonsList;
     this.botonForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -153,7 +151,7 @@ export class ButtonsComponent {
     this.buttonsList = this.filter(filterValue);
   }
 
-  filter(v: string): course[] {
+  filter(v: string): any[] {
     return this.buttonsList
       .filter((x) => x.nombre.toLowerCase().indexOf(v.toLowerCase()) !== -1);
   }
