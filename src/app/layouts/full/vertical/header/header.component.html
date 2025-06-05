@@ -15,11 +15,21 @@
   @if(!showToggle) {
   <button
     mat-icon-button
-    (click)="toggleMobileNav.emit()"
+    [matMenuTriggerFor]="mobileMenu"
     class="d-flex justify-content-center"
   >
     <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
   </button>
+  <mat-menu #mobileMenu="matMenu">
+    @for(item of navItems; track item.displayName) {
+    @if(!item.navCap) {
+    <button mat-menu-item [routerLink]="[item.route]">
+      <i-tabler name="{{ item.iconName }}" class="icon-20 m-r-8"></i-tabler>
+      {{ item.displayName }}
+    </button>
+    }
+    }
+  </mat-menu>
   }
   <!-- --------------------------------------------------------------- -->
 

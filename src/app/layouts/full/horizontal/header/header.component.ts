@@ -59,6 +59,8 @@ export class AppHorizontalHeaderComponent {
 
   showFiller = false;
 
+  navItems = navItems;
+
   public selectedLanguage: any = {
     language: 'English',
     code: 'en',
