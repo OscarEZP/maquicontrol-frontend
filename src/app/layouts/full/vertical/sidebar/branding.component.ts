@@ -10,7 +10,7 @@ import { CoreService } from 'src/app/services/core.service';
       @if(options.theme === 'light') {
       <a href="/">
         <img
-          src="./assets/images/logos/logo.jpeg" width="160px"
+          src="./assets/images/logos/logo.jpeg" width="160px" height="70x"
           class="align-middle m-2"
           alt="logo"
         />
