@@ -21,27 +21,25 @@
     <section class="acciones-card">
       <div class="acciones-header">
         <span>
-          <mat-icon class="me-2">folder</mat-icon> Acciones Disponibles
+          <mat-icon class="me-2">folder</mat-icon>  Acciones Disponibles
         </span>
-        <div class="expand-toggle">
+        <!--<div class="expand-toggle">
           <button mat-button color="primary" (click)="expandir = !expandir">
             {{ expandir ? 'Ver menos' : 'Ver más' }}
             <mat-icon>{{ expandir ? 'expand_less' : 'expand_more' }}</mat-icon>
           </button>
-        </div>
+        </div>-->
       </div>
-      <div class="acciones-disponibles" [ngClass]="{ 'expandido': expandir }">
+      <div class="acciones-disponibles" >
         <button class="accion-btn"><mat-icon>image</mat-icon>Multimedia</button>
         <button class="accion-btn"><mat-icon>edit</mat-icon>Editar</button>
         <button class="accion-btn"><mat-icon>delete</mat-icon>Eliminar</button>
         <button class="accion-btn"><mat-icon>description</mat-icon>Manual</button>
         <button class="accion-btn"><mat-icon>settings</mat-icon>Configuración</button>
         <button class="accion-btn"><mat-icon>cloud_upload</mat-icon>Subir Archivos</button>
-        <ng-container *ngIf="expandir">
-          <button class="accion-btn"><mat-icon>folder_open</mat-icon>Documentos</button>
-          <button class="accion-btn"><mat-icon>smart_display</mat-icon>Videos</button>
-          <button class="accion-btn"><mat-icon>history</mat-icon>Historial</button>
-        </ng-container>
+        <button class="accion-btn"><mat-icon>folder_open</mat-icon>Documentos</button>
+        <button class="accion-btn"><mat-icon>smart_display</mat-icon>Videos</button>
+        <button class="accion-btn"><mat-icon>history</mat-icon>Historial</button>
       </div>
     </section>
 

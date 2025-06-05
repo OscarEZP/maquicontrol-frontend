@@ -136,6 +136,11 @@
   align-items: center;
 }
 
+.acciones-header span {
+  font-size: 1.5em;
+  margin-bottom: 14px;
+}
+
 .acciones-disponibles {
   display: flex;
   flex-wrap: wrap;
@@ -164,6 +169,7 @@
   color: var(--primary-color, #ff9800);
   transition: all 0.3s ease;
   background-color: #fffaf3;
+  margin-bottom: 14px;
 }
 
 .accion-btn:hover {
