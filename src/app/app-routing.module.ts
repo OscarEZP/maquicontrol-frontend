@@ -14,13 +14,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/dashboards/dashboard1',
+        redirectTo: '/dashboards/dashboard2',
         pathMatch: 'full',
-      },
-      {
-        path: 'starter',
-        loadChildren: () =>
-          import('./pages/pages.module').then((m) => m.PagesModule),
       },
       {
         path: 'machines',
@@ -32,50 +27,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/dashboards/dashboards.module').then(
             (m) => m.DashboardsModule
-          ),
-      },
-      {
-        path: 'ui-components',
-        loadChildren: () =>
-          import('./pages/ui-components/ui-components.module').then(
-            (m) => m.UicomponentsModule
-          ),
-      },
-      {
-        path: 'forms',
-        loadChildren: () =>
-          import('./pages/forms/forms.module').then((m) => m.FormModule),
-      },
-      {
-        path: 'charts',
-        loadChildren: () =>
-          import('./pages/charts/charts.module').then((m) => m.ChartsModule),
-      },
-      {
-        path: 'apps',
-        loadChildren: () =>
-          import('./pages/apps/apps.module').then((m) => m.AppsModule),
-      },
-      {
-        path: 'widgets',
-        loadChildren: () =>
-          import('./pages/widgets/widgets.module').then((m) => m.WidgetsModule),
-      },
-      {
-        path: 'tables',
-        loadChildren: () =>
-          import('./pages/tables/tables.module').then((m) => m.TablesModule),
-      },
-      {
-        path: 'datatable',
-        loadChildren: () =>
-          import('./pages/datatable/datatable.module').then((m) => m.DatatableModule),
-      },
-      {
-        path: 'theme-pages',
-        loadChildren: () =>
-          import('./pages/theme-pages/theme-pages.module').then(
-            (m) => m.ThemePagesModule
           ),
       },
     ],

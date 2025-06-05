@@ -32,7 +32,7 @@ export class AppSideLoginComponent {
   submit() {
     const { email, password } = this.form.value;
     if (email && password && this.auth.login(email, password)) {
-      this.router.navigate(['/dashboards/dashboard1']);
+      this.router.navigate(['/dashboards/dashboard2']);
     } else {
       this.form.setErrors({ invalid: true });
     }
