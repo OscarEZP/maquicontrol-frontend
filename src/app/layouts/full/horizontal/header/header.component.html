@@ -1,5 +1,11 @@
 <mat-toolbar class="topbar horizontal-topbar">
-  <div class="container d-flex justify-content-end">
+  <div class="container d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center">
+      <div class="d-none d-sm-flex">
+        <app-branding></app-branding>
+      </div>
+      <app-horizontal-sidebar class="d-none d-lg-flex m-l-16"></app-horizontal-sidebar>
+    </div>
     <button
       mat-icon-button
       [matMenuTriggerFor]="profilemenu"

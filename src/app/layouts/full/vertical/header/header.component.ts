@@ -14,6 +14,8 @@ import { MaterialModule } from 'src/app/material.module';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BrandingComponent } from '../sidebar/branding.component';
+import { AppHorizontalSidebarComponent } from '../../horizontal/sidebar/sidebar.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
 
@@ -49,7 +51,15 @@ interface quicklinks {
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, CommonModule, NgScrollbarModule, TablerIconsModule, MaterialModule],
+  imports: [
+    RouterModule,
+    CommonModule,
+    NgScrollbarModule,
+    TablerIconsModule,
+    MaterialModule,
+    BrandingComponent,
+    AppHorizontalSidebarComponent,
+  ],
   templateUrl: './header.component.html',
   encapsulation: ViewEncapsulation.None,
 })

@@ -1,11 +1,17 @@
 <mat-toolbar class="topbar">
-  <span class="flex-1-auto"></span>
+  <div class="container d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center">
+      <div class="d-none d-sm-flex">
+        <app-branding></app-branding>
+      </div>
+      <app-horizontal-sidebar class="d-none d-lg-flex m-l-16"></app-horizontal-sidebar>
+    </div>
 
-  <button
-    mat-icon-button
-    [matMenuTriggerFor]="profilemenu"
-    aria-label="Perfil"
-  >
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="profilemenu"
+      aria-label="Perfil"
+    >
     <img
       src="/assets/images/profile/user-1.jpg"
       class="rounded-circle object-cover icon-35 profile-dd"
@@ -65,5 +71,6 @@
         >Cerrar sesión</a
       >
     </div>
-  </mat-menu>
+    </mat-menu>
+  </div>
 </mat-toolbar>
