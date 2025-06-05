@@ -1,101 +1,133 @@
-.public-header {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: white;
+.maquicontrol-view {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  padding: 0;
   margin: 0;
 }
 
-.public-header mat-card {
+.public-header {
+  width: 100%;
+  z-index: 1000;
+  position: relative;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   background: white;
-  padding: 16px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  align-items: center;
+  padding: 2% 3%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
-
-  margin: 0 !important; /* 👈 necesario para sticky */
-  border-radius: 0;      /* evita comportamiento extraño en sticky */
+  z-index: 1000;
 }
 
-.public-header.minimized mat-card {
-  justify-content: center;
+.public-header.minimized .fixed-header {
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-.public-header .left {
+.left {
   display: flex;
   align-items: center;
-  gap: 16px;
-  transition: all 0.3s ease;
+  gap: 3%;
+  width: 70%;
 }
 
 .public-header.minimized .left {
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  gap: 8px;
-  width: 100%;
+}
+
+.left, .mat-headline, .public-image {
+  transition: all 0.3s ease;
 }
 
 .public-image {
-  height: 100px;
-  width: 160px;
-  object-fit: cover;
+  width: 20%;
+  max-width: 140px;
+  height: auto;
   border-radius: 12px;
+  object-fit: cover;
   transition: all 0.3s ease;
 }
 
 .public-header.minimized .public-image {
-  width: 80px;
-  height: 80px;
-  opacity: 1;
+  width: 100px;
+  height: 100px;
   margin: 0 auto;
-}
-
-.mat-headline {
-  font-size: 22px;
-  transition: font-size 0.3s ease, text-align 0.3s ease;
-}
-
-.mat-headline.minimized {
-  font-size: 18px;
-  text-align: center;
-}
-
-.f-s-14 {
-  font-size: 14px;
-  transition: font-size 0.3s ease, text-align 0.3s ease;
-}
-
-.f-s-14.minimized {
-  font-size: 12px;
-  text-align: center;
-}
-
-.text-muted {
-  color: #6c757d;
-}
-
-.text-end {
-  text-align: right;
+  transform: scale(1.1);
   transition: all 0.3s ease;
 }
 
+.public-header.minimized .f-s-14,
 .public-header.minimized .text-end {
-  align-self: flex-end;
-  margin-top: -60px;
+  display: none;
 }
 
+.mat-headline {
+  font-size: 2vw;
+  transition: font-size 0.3s ease;
+}
+
+.mat-headline.minimized {
+  padding-top: 10px;
+  font-size: 4.2vw;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 0.5em;
+}
+
+.f-s-14 {
+  font-size: 1vw;
+}
+
+.f-s-14.minimized {
+  font-size: 0.9vw;
+  text-align: center;
+}
+
+.estado-chip {
+  font-size: 0.9vw;
+  background: var(--primary-color, #1976d2);
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.text-end {
+  width: 30%;
+  text-align: right;
+}
+
+.public-header.minimized .text-end {
+  margin-top: -40px;
+}
+
+/* Compensar altura del header fijo */
+.contenido-activo {
+  margin-top: 130px;
+  padding: 2% 3%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Acciones */
 .acciones-card {
-  margin-top: 24px;
+  margin-top: 2%;
   background-color: #f9f9f9;
-  border-radius: 20px;
+  border-radius: 1em;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-  padding: 16px;
+  padding: 2%;
 }
 
 .acciones-header {
@@ -107,7 +139,7 @@
 .acciones-disponibles {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 1.5%;
   max-height: 600px;
   overflow: hidden;
   transition: max-height 0.3s ease-in-out;
@@ -118,15 +150,15 @@
 }
 
 .accion-btn {
-  flex: 0 1 calc(33.333% - 12px);
+  flex: 0 1 calc(33.333% - 1.5%);
   height: 100px;
-  border-radius: 16px;
+  border-radius: 1em;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 14px;
+  font-size: 1em;
   font-weight: 500;
   border: 1px solid var(--primary-color, #ff9800);
   color: var(--primary-color, #ff9800);
@@ -145,93 +177,21 @@
   font-weight: 500;
 }
 
-@media (max-width: 768px) {
-  .public-header mat-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .text-end {
-    align-self: flex-end;
-  }
-  .accion-btn {
-    flex: 0 1 calc(50% - 12px);
-  }
-}
-
-mat-card-title {
-  font-size: 16px;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-mat-card-title mat-icon {
-  font-size: 18px;
-  vertical-align: middle;
-}
-
-.expand-toggle {
-  margin-left: auto;
-}
-
-.info-card {
-  background-color: #f8f9fa;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-}
-
-.info-title {
-  font-size: 16px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-  color: #2c2c2c;
-}
-
-.info-title mat-icon {
-  font-size: 20px;
-}
-
-.info-line {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  margin-bottom: 6px;
-}
-
-.info-label {
-  font-weight: 600;
-  color: #212121;
-}
-
-.info-value {
-  color: #495057;
-}
-
-.info-line span:last-child {
-  text-align: right;
-}
-
+/* Secciones técnicas, motor, contactos */
 .seccion-info {
   background: #f9f9f9;
-  margin: 20px 0;
-  padding: 16px;
-  border-radius: 16px;
+  margin: 2% 0;
+  padding: 2%;
+  border-radius: 1em;
 }
 
 .seccion-info h4 {
-  font-size: 20px;
+  font-size: 1.5em;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 28px;
+  gap: 0.5em;
+  margin-bottom: 1.5em;
   color: #333;
 }
 
@@ -239,12 +199,12 @@ mat-card-title mat-icon {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 8px;
+  margin-bottom: 1em;
 }
 
 .seccion-info .fila span {
   width: 48%;
-  font-size: 17px;
+  font-size: 1.1em;
   color: #444;
 }
 
@@ -253,6 +213,7 @@ mat-card-title mat-icon {
   color: #000;
 }
 
+/* Contactos */
 .centrado {
   display: flex;
   justify-content: space-between;
@@ -264,7 +225,7 @@ mat-card-title mat-icon {
   flex: 1;
   min-width: 100px;
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 1em;
   font-weight: 500;
   color: #333;
   border-color: #ccc;
@@ -277,13 +238,39 @@ mat-card-title mat-icon {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
+/* Footer */
 .footer-info {
   background-color: #f9f9f9;
-  border-radius: 16px;
-  padding: 12px;
+  border-radius: 1em;
+  padding: 1.5%;
   text-align: center;
-  font-size: 15px;
+  font-size: 1em;
   font-weight: 500;
   color: #2e2e2e;
-  margin-top: 24px;
+  margin-top: 2em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .fixed-header {
+    flex-direction: column;
+    align-items: center;
+    padding: 4% 3%;
+  }
+
+  .public-image {
+    width: 30%;
+  }
+
+  .accion-btn {
+    flex: 0 1 calc(50% - 1.5%);
+  }
+
+  .mat-headline {
+    font-size: 1.4em;
+  }
+
+  .f-s-14 {
+    font-size: 0.9em;
+  }
 }

@@ -3,7 +3,7 @@ import { Component, HostListener } from '@angular/core';
 @Component({
   selector: 'app-public-details',
   templateUrl: './public-details.component.html',
-  styleUrl: './public-details.component.scss'
+  styleUrls: ['./public-details.component.scss']
 })
 export class PublicDetailsComponent {
   // Datos principales (puedes reemplazarlos con datos reales o @Input())
