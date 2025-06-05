@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
+import { AppAccountSettingComponent } from './maquicontrol/account-setting/account-setting.component';
 import { PublicDetailsComponent } from './maquicontrol/machines/public-details/public-details.component';
 
 const routes: Routes = [
@@ -22,6 +23,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('../app/maquicontrol/machines/machines.module').then((m) => m.MachinesModule)
       },
+      {
+        path: 'account-settings',
+        component: AppAccountSettingComponent
+      },
+
       {
         path: 'dashboards',
         loadChildren: () =>

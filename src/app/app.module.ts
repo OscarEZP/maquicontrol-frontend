@@ -25,13 +25,14 @@ import { FilterPipe } from './pipe/filter.pipe';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PublicDetailsComponent } from './maquicontrol/machines/public-details/public-details.component';
+import { AppAccountSettingComponent } from './maquicontrol/account-setting/account-setting.component';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent, BlankComponent, FilterPipe, PublicDetailsComponent],
+  declarations: [AppComponent, BlankComponent, FilterPipe, PublicDetailsComponent, AppAccountSettingComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

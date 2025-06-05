@@ -9,18 +9,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
-import { ThemePagesRoutes } from './theme-pages.routing';
 
 // theme pages
-import { AppAccountSettingComponent } from '../../maquicontrol/account-setting/account-setting.component';
-import { AppFaqComponent } from './faq/faq.component';
-import { AppPricingComponent } from './pricing/pricing.component';
-import { AppTreeviewComponent } from './treeview/treeview.component';
+import { AppAccountSettingComponent } from './account-setting.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(ThemePagesRoutes),
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
@@ -29,9 +24,6 @@ import { AppTreeviewComponent } from './treeview/treeview.component';
   ],
   declarations: [
     AppAccountSettingComponent,
-    AppFaqComponent,
-    AppPricingComponent,
-    AppTreeviewComponent,
   ],
 })
-export class ThemePagesModule {}
+export class AccountSettingsModule {}
