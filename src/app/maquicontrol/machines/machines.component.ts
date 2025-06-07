@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { ApiService } from '../../services/api.service';
 
 export interface MachineElement {
   id: number;
@@ -16,22 +17,7 @@ export interface MachineElement {
   nombre_empresa: string;
 }
 
-const machines: MachineElement[] = [
-  {
-    id: 14,
-    marca: "Jaguar",
-    modelo: "Fiesta",
-    matricula: "123QWEQ",
-    num_parque: "3425454",
-    tipo_motor: "electrico",
-    imagen: "https://storage.googleapis.com/maquicontrol-90a19.firebasestorage.app/imgActivos/Icon.png?GoogleAccessId=maquicontrol-90a19%40appspot.gserviceaccount.com&Expires=1748286730&Signature=...",
-    anio_fabricacion: null,
-    num_serie: "1433543",
-    referencia: "imgActivos/Icon.png",
-    id_empresa: 2,
-    nombre_empresa: "Empresa Prueba"
-  }
-];
+const machines: MachineElement[] = [];
 
 @Component({
   selector: 'app-machines',
@@ -53,10 +39,12 @@ export class MachinesComponent implements OnInit {
     'accion'
   ];
 
-  constructor() {}
+  constructor(private api: ApiService) {}
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(machines);
+    this.api.getMachines().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(data);
+    });
   }
 
   applyFilter(filterValue: string): void {
