@@ -73,6 +73,8 @@ export class HeaderComponent {
 
   showFiller = false;
 
+  navItems = navItems;
+
   public selectedLanguage: any = {
     language: 'English',
     code: 'en',
