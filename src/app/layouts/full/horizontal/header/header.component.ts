@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { BrandingComponent } from '../../vertical/sidebar/branding.component';
+import { AppHorizontalSidebarComponent } from '../sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
 
 
@@ -47,7 +48,13 @@ interface quicklinks {
 @Component({
   selector: 'app-horizontal-header',
   standalone: true,
-  imports: [RouterModule, TablerIconsModule, MaterialModule, BrandingComponent],
+  imports: [
+    RouterModule,
+    TablerIconsModule,
+    MaterialModule,
+    BrandingComponent,
+    AppHorizontalSidebarComponent,
+  ],
   templateUrl: './header.component.html',
 })
 export class AppHorizontalHeaderComponent {

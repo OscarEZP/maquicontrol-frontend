@@ -77,8 +77,6 @@
       <!-- horizontal header -->
       <app-horizontal-header (toggleMobileNav)="sidenav.toggle()"
         (toggleMobileFilterNav)="filterNavRight.toggle()"></app-horizontal-header>
-      } @if(options.horizontal) {
-      <app-horizontal-sidebar></app-horizontal-sidebar>
       }
 
       <main class="pageWrapper" [ngClass]="{
