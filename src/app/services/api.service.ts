@@ -12,6 +12,6 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getMachines(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/machines`);
+    return this.http.get(`${this.baseUrl}/activos`);
   }
 }

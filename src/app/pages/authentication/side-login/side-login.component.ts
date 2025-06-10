@@ -21,7 +21,7 @@ export class AppSideLoginComponent {
   ) {}
 
   form = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
 
