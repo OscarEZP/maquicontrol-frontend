@@ -18,9 +18,7 @@ export class AuthService {
       password
     }).pipe(
       tap((response: any) => {
-        // Guarda el token o el usuario en localStorage
-        localStorage.setItem('user', JSON.stringify(response));
-        this.router.navigate(['/dashboard']);
+        return response
       }),
       catchError(err => {
         console.error('Error de login', err);
