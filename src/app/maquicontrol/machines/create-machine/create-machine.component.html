@@ -10,90 +10,75 @@
         <!-- Categoría -->
         <div class="col-sm-6">
           <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Categoría</mat-label>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input matInput formControlName="categoria" />
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select formControlName="id_categoria" placeholder="Seleccionar">
+              <mat-option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
 
-        <!-- Tipo -->
+        <!-- Tipo de Activo -->
         <div class="col-sm-6">
-          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Tipo</mat-label>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input matInput formControlName="tipo" />
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Tipo de Activo</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select formControlName="id_tipo" placeholder="Seleccionar">
+              <mat-option *ngFor="let tipo of tiposFiltrados" [value]="tipo.id">{{ tipo.nombre }}</mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
 
-        <!-- Marca -->
+        <!-- Marca, Modelo, Serie, Parque, Matrícula, Tipo motor -->
+        <ng-container *ngFor="let campo of ['marca','modelo','num_serie','num_parque','matricula']">
+          <div class="col-sm-6">
+            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">{{ campo | titlecase }}</mat-label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input matInput [formControlName]="campo" />
+            </mat-form-field>
+          </div>
+        </ng-container>
+
         <div class="col-sm-6">
-          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Marca</mat-label>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input matInput formControlName="marca" />
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Tipo de motor</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select formControlName="tipo_motor" placeholder="Seleccionar">
+              <mat-option value="diesel">Diésel</mat-option>
+              <mat-option value="electrico">Eléctrico</mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
 
-        <!-- Modelo -->
-        <div class="col-sm-6">
-          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Modelo</mat-label>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input matInput formControlName="modelo" />
-          </mat-form-field>
-        </div>
-
-        <!-- Número de serie -->
-        <div class="col-sm-6">
-          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Número de serie</mat-label>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input matInput formControlName="num_serie" />
-          </mat-form-field>
-        </div>
-
-        <!-- Número de parque -->
-        <div class="col-sm-6">
-          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Número de parque</mat-label>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input matInput formControlName="num_parque" />
-          </mat-form-field>
-        </div>
-
-        <!-- Matrícula -->
-        <div class="col-sm-6">
-          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Matrícula</mat-label>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input matInput formControlName="matricula" />
-          </mat-form-field>
-        </div>
-
-        <!-- Imagen (input tipo file) -->
+        <!-- Imagen -->
         <div class="col-sm-6 m-t-12">
           <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Imagen</mat-label>
-          <div class="d-flex align-items-center">
-            <input
-              type="file"
-              #fileInput
-              hidden
-              (change)="onFileSelected($event)"
-            />
-            <button
-              mat-flat-button
-              color="primary"
-              type="button"
-              (click)="fileInput.click()"
-            >
-              Seleccionar archivo
-            </button>
-            <span class="ms-2 f-s-14" *ngIf="selectedFileName">
-              {{ selectedFileName }}
-            </span>
+          <div class="d-flex flex-column align-items-start gap-2">
+            <div class="d-flex align-items-center gap-2">
+              <input
+                type="file"
+                #fileInput
+                hidden
+                accept=".jpg,.jpeg,.png"
+                (change)="onFileSelected($event)"
+              />
+              <button mat-flat-button color="primary" type="button" (click)="fileInput.click()">
+                Seleccionar archivo
+              </button>
+              <span class="f-s-14" *ngIf="selectedFileName">{{ selectedFileName }}</span>
+            </div>
+
+            <!-- Vista previa -->
+            <div *ngIf="imagePreview" class="m-t-8">
+              <img [src]="imagePreview" alt="Previsualización" style="max-height: 200px; border-radius: 8px;" />
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Botón -->
-      <div class="m-t-12 text-end">
+      <div class="text-end m-t-12">
         <button mat-flat-button color="primary" type="submit">
           {{ isEditMode ? 'Actualizar' : 'Guardar' }}
         </button>
       </div>
     </form>
+
   </mat-card-content>
 </mat-card>
