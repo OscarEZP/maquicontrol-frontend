@@ -34,6 +34,22 @@
   <span class="flex-1-auto"></span>
 
   <!-- --------------------------------------------------------------- -->
+  <!-- main Dropdown -->
+  <!-- --------------------------------------------------------------- -->
+  <button mat-button [matMenuTriggerFor]="mainMenu">Menú</button>
+  <mat-menu #mainMenu="matMenu">
+    <button mat-menu-item [routerLink]="['/dashboards/dashboard2']">
+      Dashboard
+    </button>
+    <button mat-menu-item [routerLink]="['/machines']">
+      Listar maquinarias
+    </button>
+    <button mat-menu-item [routerLink]="['/machines/create']">
+      Crear maquinarias
+    </button>
+  </mat-menu>
+
+  <!-- --------------------------------------------------------------- -->
   <!-- profile Dropdown -->
   <!-- --------------------------------------------------------------- -->
   <button
