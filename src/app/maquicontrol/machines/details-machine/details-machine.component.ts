@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-details-machine',
@@ -11,11 +12,13 @@ export class DetailsMachineComponent implements OnInit {
   machine: any;
   technicalSpecs: any[] = [];
   documentation: any[] = [];
+  logo2: string = './assets/logo2.png';
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private api: ApiService
   ) {}
 
   ngOnInit(): void {
@@ -63,8 +66,25 @@ export class DetailsMachineComponent implements OnInit {
     this.router.navigate(['/machines', this.machine.activo.id, 'botones']);
   }
 
-  generarQR(): void {
-    console.log('Generando QR para', this.machine.activo.id);
+  async generarQR(format: 'png' | 'pdf' | 'svg' = 'png'): Promise<void> {
+    const activo = this.machine?.activo;
+    if (!activo) {
+      console.error('No hay datos del activo para generar QR');
+      return;
+    }
+
+    try {
+      const qrData = this.api.generateQRData(activo); // genera la URL
+      await this.api.generateAndDownloadQR(
+        qrData,
+        `qr-activo-${activo.id}`,
+        format,
+        this.logo2,
+        activo
+      );
+    } catch (error) {
+      console.error('Error al generar o descargar el QR:', error);
+    }
   }
 
   eliminar(): void {

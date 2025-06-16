@@ -78,19 +78,16 @@
     </h3>
 
     <div class="acciones-grid">
-      <button mat-stroked-button color="warn" (click)="verMultimedia()">
-        <mat-icon class="me-1">image</mat-icon> Multimedia
-      </button>
 
       <button mat-stroked-button color="warn" [routerLink]="['/machines/update', machine.activo.id]">
         <mat-icon class="me-1">edit</mat-icon> Editar Activo
       </button>
 
-      <button mat-stroked-button color="warn" (click)="verBotones()">
-        <mat-icon class="me-1">settings</mat-icon> Botones Activo
+      <button mat-stroked-button color="warn" [routerLink]="['/machines/buttons', machine.activo.id]">
+        <mat-icon class="me-1">settings</mat-icon> Botones
       </button>
 
-      <button mat-stroked-button color="warn" (click)="generarQR()">
+      <button mat-stroked-button color="warn" (click)="generarQR('png')">
         <mat-icon class="me-1">qr_code</mat-icon> Generar QR (PNG)
       </button>
 
