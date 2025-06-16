@@ -11,6 +11,7 @@ export const navItems: NavItem[] = [
   },
   {
     displayName: 'Maquinarias',
+    iconName: 'truck',
     route: 'machines',
     children: [
       {
