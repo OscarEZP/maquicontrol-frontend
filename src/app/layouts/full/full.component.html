@@ -71,14 +71,15 @@
       <!-- VerticalHeader -->
       <!-- ============================================================== -->
       @if (!options.horizontal) {
-      <app-header [showToggle]="!isOver" (toggleCollapsed)="toggleCollapsed()" (toggleMobileNav)="sidenav.toggle()"
-        (toggleMobileFilterNav)="filterNavRight.toggle()"></app-header>
-      } @else {
-      <!-- horizontal header -->
-      <app-horizontal-header (toggleMobileNav)="sidenav.toggle()"
-        (toggleMobileFilterNav)="filterNavRight.toggle()"></app-horizontal-header>
-      }
-
+        <app-header [showToggle]="!isOver" (toggleCollapsed)="toggleCollapsed()" (toggleMobileNav)="sidenav.toggle()"
+          (toggleMobileFilterNav)="filterNavRight.toggle()"></app-header>
+        } @else {
+        <!-- horizontal header -->
+        <app-horizontal-header (toggleMobileNav)="sidenav.toggle()"
+          (toggleMobileFilterNav)="filterNavRight.toggle()"></app-horizontal-header>
+        } @if(options.horizontal) {
+        <app-horizontal-sidebar></app-horizontal-sidebar>
+        }
       <main class="pageWrapper" [ngClass]="{
         maxWidth: options.boxed
       }">
