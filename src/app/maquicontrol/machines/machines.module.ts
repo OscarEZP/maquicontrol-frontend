@@ -27,6 +27,7 @@ import { PublicDetailsComponent } from './public-details/public-details.componen
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ConfirmDeleteDialogComponent } from './buttons/confirm-delete-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './buttons/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ButtonsComponent,
     CreateButtonModalComponent,
     ButtonFilesComponent,
-    ConfirmDeleteDialogComponent
+    ConfirmDeleteDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,

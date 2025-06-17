@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api.service';
+import { ConfirmDialogComponent } from './confirm-dialog.component';
 
 @Component({
   selector: 'app-button-files',
@@ -9,19 +10,22 @@ import { ApiService } from 'src/app/services/api.service';
 
 })
 export class ButtonFilesComponent {
-  archivos: { nombre: string, tipo: string, url: string }[] = [];
+
+  archivos: { nombre: string, tipo: string, url: string, referencia: string }[] = [];
   uploadedFiles: {
     nombre: string;
     tipo: 'image' | 'pdf' | 'docx' | 'other';
     tipoOriginal: string;
+    referencia: string;
+    file: File;
     preview?: string;
   }[] = [];
 
   esImagen(tipo: string): boolean {
-    return ['jpg', 'jpeg', 'png', 'svg'].includes(tipo.toLowerCase());
+    return ['jpg', 'jpeg', 'png', 'svg', 'image'].includes(tipo.toLowerCase());
   }
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { botonId: any, activoId: any }, private apiService: ApiService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { botonId: any, activoId: any }, private apiService: ApiService, private dialog: MatDialog) {
     // Aquí podrías cargar archivos reales asociados al botón
     this.cargarArchivos();
   }
@@ -31,11 +35,11 @@ export class ButtonFilesComponent {
       next: (response) => {
         const { imagenes = [], pdfs = [], videos = [] } = response;
 
-        const archivos: { nombre: string; tipo: string; url: string }[] = [];
+        const archivos: { nombre: string; tipo: string; url: string, referencia: string }[] = [];
 
-        imagenes.forEach((img: any) => archivos.push({ nombre: img.nombre, tipo: 'image', url: img.url }));
-        pdfs.forEach((pdf: any) => archivos.push({ nombre: pdf.nombre, tipo: 'pdf', url: pdf.url }));
-        videos.forEach((vid: any) => archivos.push({ nombre: vid.nombre, tipo: 'video', url: vid.url }));
+        imagenes.forEach((img: any) => archivos.push({ nombre: img.nombre, tipo: 'image', url: img.url, referencia: img.referencia }));
+        pdfs.forEach((pdf: any) => archivos.push({ nombre: pdf.nombre, tipo: 'pdf', url: pdf.url, referencia: pdf.referencia }));
+        videos.forEach((vid: any) => archivos.push({ nombre: vid.nombre, tipo: 'video', url: vid.url, referencia: vid.referencia }));
 
         this.archivos = archivos;
       },
@@ -45,8 +49,26 @@ export class ButtonFilesComponent {
     });
   }
 
-  eliminarArchivo(archivo: { nombre: string }) {
-    this.archivos = this.archivos.filter(a => a !== archivo);
+  eliminarArchivo(archivo: any) {
+    console.log(archivo)
+    const referencia = archivo.referencia
+
+    this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: { nombre: archivo.nombre }
+    }).afterClosed().subscribe(confirmado => {
+      if (confirmado) {
+        this.apiService.deleteArchivoDeActivo(this.data.activoId, referencia).subscribe({
+          next: () => {
+            console.log('Archivo eliminado con éxito');
+            this.cargarArchivos(); // refresca la lista
+          },
+          error: err => {
+            console.error('Error al eliminar archivo:', err);
+          }
+        });
+      }
+    });
   }
 
 
@@ -85,7 +107,12 @@ export class ButtonFilesComponent {
         tipo = 'docx';
       }
 
-      const fileData: any = { nombre, tipo, tipoOriginal };
+      const fileData: any = {
+        nombre,
+        tipo,
+        tipoOriginal,
+        file
+      };
 
       if (tipo === 'image') {
         const reader = new FileReader();
@@ -97,8 +124,20 @@ export class ButtonFilesComponent {
       } else {
         this.uploadedFiles.push(fileData);
       }
+
+      // Subir automáticamente al cargar
+      this.apiService.uploadArchivosParaBoton(this.data.activoId, this.data.botonId, [file]).subscribe({
+        next: res => {
+          console.log('Archivo guardado exitosamente:', res);
+          this.cargarArchivos(); // actualiza lista principal
+        },
+        error: err => {
+          console.error('Error al guardar archivo:', err);
+        }
+      });
     });
   }
+
 
   removeFile(index: number) {
     this.uploadedFiles.splice(index, 1);

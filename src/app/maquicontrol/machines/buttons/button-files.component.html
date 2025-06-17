@@ -11,7 +11,6 @@
             <div class="col-md-6 col-lg-4 m-b-16" *ngFor="let archivo of archivos">
               <mat-card class="cardWithShadow text-center">
                 <mat-card-content>
-
                   <ng-container *ngIf="esImagen(archivo.tipo); else iconoArchivo">
                     <img [src]="archivo.url" alt="{{ archivo.nombre }}" class="img-fluid rounded m-b-8"
                       style="max-height: 180px; object-fit: cover; width: 100%;" />
@@ -88,7 +87,7 @@
                   <div class="f-s-12 text-muted">{{ file.tipoOriginal }}</div>
                 </div>
 
-                <button mat-stroked-button color="warn" (click)="removeFile(i)">Borrar documento</button>
+                <button mat-stroked-button color="warn" (click)="eliminarArchivo(file); removeFile(i)">Borrar documento</button>
               </mat-card>
             </div>
           </div>

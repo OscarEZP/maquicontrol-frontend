@@ -255,5 +255,22 @@ export class ApiService {
     return this.http.get<any>(`${this.baseUrl}/botones/${botonId}/files/${activoId}`);
   }
 
+  uploadArchivosParaBoton(activoId: number, botonId: number, archivos: File[]): Observable<any> {
+    const formData = new FormData();
+    archivos.forEach(file => {
+      formData.append('archivos[]', file); // nombre exacto del campo
+    });
+    formData.append('id_boton', botonId.toString());
+
+    return this.http.post(`${this.baseUrl}/activos/${activoId}/storage`, formData);
+  }
+
+  deleteArchivoDeActivo(activoId: number, referencia: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/activos/${activoId}/storage`, {
+      params: {
+        type: referencia
+      }
+    });
+  }
 
 }
