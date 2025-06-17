@@ -25,6 +25,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { ButtonFilesComponent } from './buttons/button-files.component';
 import { PublicDetailsComponent } from './public-details/public-details.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ConfirmDeleteDialogComponent } from './buttons/confirm-delete-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ButtonsComponent,
     CreateButtonModalComponent,
     ButtonFilesComponent,
-
+    ConfirmDeleteDialogComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +60,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatNativeDateModule,
     NgScrollbarModule,
     MatIconModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatDialogModule
   ],
   exports: [TablerIconsModule],
 

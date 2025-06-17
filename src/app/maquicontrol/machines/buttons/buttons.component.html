@@ -46,11 +46,11 @@
               Editar
             </button>
 
-            <button mat-stroked-button color="warn" class="btn-accion warn">
+            <button mat-stroked-button color="warn" class="btn-accion warn" (click)="eliminarBoton(button)">
               Eliminar
             </button>
 
-            <button mat-stroked-button color="primary" class="btn-accion" (click)="openArchivosDialog(button.nombre)">
+            <button mat-stroked-button color="primary" class="btn-accion" (click)="openArchivosDialog(button.id)">
               Archivos
             </button>
           </div>

@@ -238,4 +238,22 @@ export class ApiService {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   }
+
+  getBotonesByActivoId(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/botones?id=${id}`);
+  }
+
+  updateBoton(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/botones/${id}`, data);
+  }
+
+  deleteBoton(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/botones/${id}`);
+  }
+
+  getArchivosDeBoton(botonId: number, activoId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/botones/${botonId}/files/${activoId}`);
+  }
+
+
 }
