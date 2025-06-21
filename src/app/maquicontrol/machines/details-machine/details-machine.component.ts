@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { finalize } from 'rxjs/operators';
 import { ApiService } from 'src/app/services/api.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-details-machine',
   templateUrl: './details-machine.component.html',
-  styleUrl: './details-machine.component.scss'
+  styleUrls: ['./details-machine.component.scss']
 })
 export class DetailsMachineComponent implements OnInit {
   machine: any;
@@ -18,18 +20,22 @@ export class DetailsMachineComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private api: ApiService
+    private api: ApiService,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
+      this.loadingService.show();
       this.fetchMachine(+id);
     }
   }
 
   fetchMachine(id: number): void {
-    this.api.getMachine(id).subscribe({
+    this.api.getMachine(id)
+      .pipe(finalize(() => this.loadingService.hide()))
+      .subscribe({
       next: (data) => {
         this.machine = data;
         this.mapSections();

@@ -92,17 +92,17 @@
     <section class="seccion-info">
       <h4><mat-icon>phone</mat-icon> Contactos</h4>
       <div class="fila fila-contactos-h">
-        <a [href]="'tel:' + telefonos.comercial" class="enlace-contacto-h">
+        <a [href]="'tel:' + (telefonos?.comercial || '')" class="enlace-contacto-h">
           <button mat-stroked-button class="contacto-btn contacto-horizontal">
             👔 Comercial
           </button>
         </a>
-        <a [href]="'tel:' + telefonos.taller" class="enlace-contacto-h">
+        <a [href]="'tel:' + (telefonos?.taller || '')" class="enlace-contacto-h">
           <button mat-stroked-button class="contacto-btn contacto-horizontal" [disabled]="!telefonos?.taller">
             🔧 Taller
           </button>
         </a>
-        <a [href]="'tel:' + telefonos.oficina" class="enlace-contacto-h">
+        <a [href]="'tel:' + (telefonos?.oficina || '')" class="enlace-contacto-h">
           <button mat-stroked-button class="contacto-btn contacto-horizontal" [disabled]="!telefonos?.oficina">
             🏢 Oficina
           </button>
