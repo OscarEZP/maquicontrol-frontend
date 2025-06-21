@@ -29,8 +29,7 @@ export class DetailsMachineComponent implements OnInit {
   }
 
   fetchMachine(id: number): void {
-    const url = `https://maquicontrol-90a19.ew.r.appspot.com/api/activosPriv/${id}`;
-    this.http.get<any>(url).subscribe({
+    this.api.getMachine(id).subscribe({
       next: (data) => {
         this.machine = data;
         this.mapSections();

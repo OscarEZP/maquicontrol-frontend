@@ -281,4 +281,8 @@ export class ApiService {
     return this.http.get(`https://maquicontrol-90a19.ew.r.appspot.com/api/activos/${id}`);
   }
 
+  getMachine(id: number) {
+    const url = `https://maquicontrol-90a19.ew.r.appspot.com/api/activosPriv/${id}`;
+    return this.http.get<any>(url);
+  }
 }

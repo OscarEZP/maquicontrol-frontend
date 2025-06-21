@@ -28,7 +28,7 @@ export class TokenInterceptor implements HttpInterceptor {
         }
       }
     }
-
+    console.log("LOADING")
     this.loadingService.show();
     return next.handle(request).pipe(finalize(() => this.loadingService.hide()));
   }
