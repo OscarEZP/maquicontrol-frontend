@@ -274,6 +274,11 @@ export class ApiService {
   }
 
   createBoton(payload: any) {
-    return this.http.post('https://maquicontrol-90a19.ew.r.appspot.com/api/botones/create', payload);
+    return this.http.post(`${this.baseUrl}/botones/create`, payload);
   }
+
+  getActivoById(id: number) {
+    return this.http.get(`https://maquicontrol-90a19.ew.r.appspot.com/api/activos/${id}`);
+  }
+
 }

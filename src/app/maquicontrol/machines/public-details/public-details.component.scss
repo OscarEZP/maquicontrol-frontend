@@ -115,7 +115,7 @@
 
 /* Compensar altura del header fijo */
 .contenido-activo {
-  margin-top: 130px;
+  margin-top: 160px;
   padding: 2% 3%;
   width: 100%;
   box-sizing: border-box;
@@ -279,4 +279,135 @@
   .f-s-14 {
     font-size: 0.9em;
   }
+}
+
+.accion-btn.btn-disabled {
+  background-color: #e0e0e0;
+  color: #888 !important;
+  cursor: not-allowed;
+  border: 1px solid #ccc;
+  pointer-events: none;
+}
+
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-line {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1vw;
+  line-height: 1.5em;
+  gap: 0.5em;
+}
+
+.public-header.minimized .info-line {
+  font-size: 0.9vw;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Estilo legacy para la cabecera */
+.legacy-style .header-card {
+  background: #f9f9f9;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  padding: 16px 24px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.legacy-content {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.legacy-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.legacy-title {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: #1976d2;
+  margin: 0;
+}
+
+.badge-row {
+  display: flex;
+  gap: 10px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: white;
+}
+
+.badge.blue {
+  background-color: #1976d2;
+}
+
+.badge.cyan {
+  background-color: #00bcd4;
+}
+
+.text-row {
+  font-size: 0.95em;
+  color: #333;
+}
+
+.icons-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.motor-label {
+  background: #e0e0e0;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #333;
+  width: fit-content;
+}
+
+/* Imagen más cuadrada con bordes redondeados */
+.rounded-img {
+  border-radius: 12px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+
+.fila-contactos-h {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  flex-wrap: wrap; // opcional para móvil
+}
+
+.enlace-contacto-h {
+  flex: 1;
+  text-decoration: none;
+  min-width: 100px;
+}
+
+.contacto-btn.contacto-horizontal {
+  width: 100%;
+  padding: 12px;
+  font-size: 1em;
+  font-weight: 500;
+  text-align: center;
+  border-radius: 10px;
 }
