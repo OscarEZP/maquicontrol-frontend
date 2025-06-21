@@ -53,7 +53,7 @@ export class ApiService {
   }
 
   generateQRData(activo: any): string {
-    const baseUrl = 'https://maquicontrol-public-dot-maquicontrol-90a19.ew.r.appspot.com/vistaactivo'; // Cambia por tu URL real
+    const baseUrl = 'https://maquicontrol-frontend-new-version-dot-maquicontrol-90a19.ew.r.appspot.com/public-details'; // Cambia por tu URL real
     const activoUrl = `${baseUrl}/${activo.id}`;
 
     return activoUrl;
