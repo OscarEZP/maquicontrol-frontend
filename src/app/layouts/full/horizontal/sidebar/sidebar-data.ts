@@ -12,17 +12,17 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Maquinarias',
     iconName: 'truck',
-    route: 'machines',
+    route: 'dashboard/machines',
     children: [
       {
         displayName: 'Listar maquinas',
         iconName: 'point',
-        route: 'machines',
+        route: 'dashboard/machines',
       },
       {
         displayName: 'Crear maquinas',
         iconName: 'point',
-        route: 'machines/create',
+        route: 'dashboard/machines/create',
       },
     ],
   },

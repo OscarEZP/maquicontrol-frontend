@@ -7,15 +7,16 @@ import { AppAccountSettingComponent } from './maquicontrol/account-setting/accou
 import { PublicDetailsComponent } from './maquicontrol/machines/public-details/public-details.component';
 
 const routes: Routes = [
+  // Ruta para usuarios autenticados
   {
-    path: '',
+    path: 'dashboard',
     component: FullComponent,
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
       {
         path: '',
-        redirectTo: '/dashboards/dashboard2',
+        redirectTo: 'dashboards/dashboard2',
         pathMatch: 'full',
       },
       {
@@ -27,9 +28,8 @@ const routes: Routes = [
         path: 'account-settings',
         component: AppAccountSettingComponent
       },
-
       {
-        path: 'dashboards',
+        path: '',
         loadChildren: () =>
           import('./pages/dashboards/dashboards.module').then(
             (m) => m.DashboardsModule
@@ -37,22 +37,24 @@ const routes: Routes = [
       },
     ],
   },
+
+  // Ruta pública para el landing y otras páginas no autenticadas
   {
     path: '',
     component: BlankComponent,
     children: [
       {
+        path: '',
+        loadChildren: () =>
+          import('./pages/theme-pages/landingpage/landingpage.module').then(
+            (m) => m.LandingPageModule
+          ),
+      },
+      {
         path: 'authentication',
         loadChildren: () =>
           import('./pages/authentication/authentication.module').then(
             (m) => m.AuthenticationModule
-          ),
-      },
-      {
-        path: 'landingpage',
-        loadChildren: () =>
-          import('./pages/theme-pages/landingpage/landingpage.module').then(
-            (m) => m.LandingPageModule
           ),
       },
       {
@@ -62,6 +64,11 @@ const routes: Routes = [
     ],
   },
 
+  // Fallback: si ninguna ruta coincide, redirigir al landing
+  {
+    path: '**',
+    redirectTo: '',
+  }
 ];
 
 @NgModule({

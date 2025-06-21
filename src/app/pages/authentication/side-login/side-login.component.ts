@@ -34,7 +34,7 @@ export class AppSideLoginComponent {
     if (email && password) {
       this.auth.login(email, password).subscribe((res) => {
         localStorage.setItem('user', JSON.stringify(res));
-        this.router.navigate(['/dashboards/dashboard2']);
+        this.router.navigate(['/dashboard']);
       });
 
     } else {
