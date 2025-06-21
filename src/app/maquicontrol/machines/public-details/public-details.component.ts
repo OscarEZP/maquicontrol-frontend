@@ -1,6 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { ApiService } from 'src/app/services/api.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-public-details',
@@ -41,7 +43,7 @@ export class PublicDetailsComponent implements OnInit {
     comercial?: string;
     taller?: string;
     oficina?: string;
-  } = {};
+  } | null = null;
 
   motorDiesel: any;
 
@@ -51,13 +53,18 @@ export class PublicDetailsComponent implements OnInit {
     this.expandir = y > 50;
   }
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: ApiService,
+    private loadingService: LoadingService
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
         this.activoId = +id;
+        this.loadingService.show();
         this.cargarDatosActivo();
         this.cargarBotones();
       }
@@ -65,7 +72,10 @@ export class PublicDetailsComponent implements OnInit {
   }
 
   cargarDatosActivo(): void {
-    this.apiService.getActivoById(this.activoId).subscribe({
+    this.apiService
+      .getActivoById(this.activoId)
+      .pipe(finalize(() => this.loadingService.hide()))
+      .subscribe({
       next: (data: any) => {
         const activo = data.activo;
         this.nombre = activo.nombre;
@@ -100,7 +110,11 @@ export class PublicDetailsComponent implements OnInit {
   }
 
   cargarBotones(): void {
-    this.apiService.getBotonesByActivoId(this.activoId).subscribe({
+    this.loadingService.show();
+    this.apiService
+      .getBotonesByActivoId(this.activoId)
+      .pipe(finalize(() => this.loadingService.hide()))
+      .subscribe({
       next: (data: any) => {
         this.acciones = data.botones || [];
       },
