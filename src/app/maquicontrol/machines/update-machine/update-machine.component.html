@@ -92,7 +92,7 @@
       <!-- MOTOR ELÉCTRICO -->
       <div *ngIf="tipoMotor === 'electrico'" class="m-t-24">
         <mat-card class="border-left border-success">
-          <mat-card-title>🔋 Información de Batería</mat-card-title>
+          <mat-card-title>Información de Batería</mat-card-title>
           <div class="row">
             <div class="col-sm-6" *ngFor="let field of bateriaFields">
               <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">{{ field.label }} *</mat-label>
@@ -119,7 +119,7 @@
       <!-- MOTOR DIÉSEL -->
       <div *ngIf="tipoMotor === 'diesel'" class="m-t-24">
         <mat-card class="border-left border-warning">
-          <mat-card-title>⛽ Información del Motor Diésel</mat-card-title>
+          <mat-card-title>Información del Motor Diésel</mat-card-title>
           <div class="row">
             <div class="col-sm-6" *ngFor="let field of dieselFields">
               <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">{{ field.label }} *</mat-label>

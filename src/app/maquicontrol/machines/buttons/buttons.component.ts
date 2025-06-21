@@ -164,7 +164,6 @@ export class CreateButtonModalComponent implements OnInit {
   guardarBoton(): void {
     if (this.form.valid) {
       const formValue = this.form.value;
-
       const payload = {
         ...formValue,
         id_activo: this.data?.id_activo
@@ -173,18 +172,23 @@ export class CreateButtonModalComponent implements OnInit {
       if (this.data?.id) {
         this.apiService.updateBoton(this.data.id, payload).subscribe({
           next: (response) => {
-            this.dialogRef.close(response); // enviamos botón actualizado al padre
+            this.dialogRef.close(response);
           },
           error: (err) => {
             console.error('❌ Error al actualizar botón:', err);
           }
         });
       } else {
-        this.dialogRef.close(payload);
+        this.apiService.createBoton(payload).subscribe({
+          next: (response) => {
+            this.dialogRef.close(response);
+          },
+          error: (err) => {
+            console.error('❌ Error al crear botón:', err);
+          }
+        });
       }
     }
   }
-
-
 
 }

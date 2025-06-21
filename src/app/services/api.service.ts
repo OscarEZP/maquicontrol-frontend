@@ -273,4 +273,7 @@ export class ApiService {
     });
   }
 
+  createBoton(payload: any) {
+    return this.http.post('https://maquicontrol-90a19.ew.r.appspot.com/api/botones/create', payload);
+  }
 }
