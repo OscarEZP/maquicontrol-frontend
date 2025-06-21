@@ -1,32 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { LoadingService } from '../services/loading.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Skip adding the token for requests to the public-details endpoint
-    if (req.url.includes('public-details')) {
-      return next.handle(req);
-    }
+  constructor(private loadingService: LoadingService) {}
 
-    const userString = localStorage.getItem('user');
-    if (userString) {
-      try {
-        const user = JSON.parse(userString);
-        const token = user?.token || user?.accessToken || user?.access_token;
-        if (token) {
-          const authReq = req.clone({
-            setHeaders: {
-              Authorization: `Bearer ${token}`
-            }
-          });
-          return next.handle(authReq);
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let request = req;
+    if (!req.url.includes('public-details')) {
+      const userString = localStorage.getItem('user');
+      if (userString) {
+        try {
+          const user = JSON.parse(userString);
+          const token = user?.token || user?.accessToken || user?.access_token;
+          if (token) {
+            request = req.clone({
+              setHeaders: {
+                Authorization: `Bearer ${token}`
+              }
+            });
+          }
+        } catch (e) {
+          // Parsing failed, continue without token
         }
-      } catch (e) {
-        // Parsing failed, continue without token
       }
     }
-    return next.handle(req);
+
+    this.loadingService.show();
+    return next.handle(request).pipe(finalize(() => this.loadingService.hide()));
   }
 }
