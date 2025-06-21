@@ -9,6 +9,8 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private loadingService: LoadingService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.loadingService.show();
+
     let request = req;
     if (!req.url.includes('public-details')) {
       const userString = localStorage.getItem('user');
@@ -28,8 +30,7 @@ export class TokenInterceptor implements HttpInterceptor {
         }
       }
     }
-    console.log("LOADING")
-    this.loadingService.show();
+
     return next.handle(request).pipe(finalize(() => this.loadingService.hide()));
   }
 }

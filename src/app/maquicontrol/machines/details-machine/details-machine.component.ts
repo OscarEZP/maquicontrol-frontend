@@ -27,14 +27,12 @@ export class DetailsMachineComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.loadingService.show();
       this.fetchMachine(+id);
     }
   }
 
   fetchMachine(id: number): void {
     this.api.getMachine(id)
-      .pipe(finalize(() => this.loadingService.hide()))
       .subscribe({
       next: (data) => {
         this.machine = data;
