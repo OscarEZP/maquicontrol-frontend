@@ -5,6 +5,7 @@ import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoadingComponent } from './shared/loading/loading.component';
 
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
@@ -52,6 +53,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
     }),
     NgScrollbarModule,
     FullComponent,
+    LoadingComponent,
   ],
   exports: [TablerIconsModule],
   providers: [
